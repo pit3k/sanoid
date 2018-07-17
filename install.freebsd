@@ -1,11 +1,24 @@
 #!/usr/local/bin/bash
 
-packages="sudo mbuffer pv lzop"
+echo "***** Installing packages *****"
 
+packages="sudo mbuffer pv lzop"
 pkg install $packages
 for pkg in $packages; do
   test -f /usr/bin/$pkg || ln -s /usr/local/bin/$pkg /usr/bin
 done
 
-pw useradd sanoid -G wheel -s /bin/sh
+echo "***** Installing sanoid *****"
+
+mkdir -p /etc/sanoid
+cp sanoid.defaults.conf /etc/sanoid/
+cp sanoid /usr/local/bin/
+
+cronmarker="sanoid-auto-installed"
+cron="0 * * * * /usr/local/bin/sanoid # $cronmarker"
+(crontab -lu root 2>/dev/null | grep -v $cronmarker; echo "$cron") | crontab -u root -
+
+echo "***** Installing syncoid *****"
+
+cp syncoid /usr/local/bin/
 
