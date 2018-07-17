@@ -1,0 +1,11 @@
+#!/usr/local/bin/bash
+
+packages="mbuffer pv lzop"
+
+pkg install sudo $packages
+for pkg in $packages; do
+  test -f /usr/bin/$pkg || ln -s /usr/local/bin/$pkg /usr/bin
+done
+
+pw useradd sanoid -G wheel -s /bin/sh
+
