@@ -1,8 +1,8 @@
 #!/usr/local/bin/bash
 
-packages="mbuffer pv lzop"
+packages="sudo mbuffer pv lzop"
 
-pkg install sudo $packages
+pkg install $packages
 for pkg in $packages; do
   test -f /usr/bin/$pkg || ln -s /usr/local/bin/$pkg /usr/bin
 done
