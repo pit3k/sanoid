@@ -12,16 +12,10 @@ pkg install perl5 p5-Config-IniFiles
 test -f /usr/bin/perl || ln -s /usr/local/bin/perl /usr/bin
 
 echo "***** Installing sanoid *****"
-
+cp sanoid /usr/local/bin/
 mkdir -p /etc/sanoid
 cp sanoid.defaults.conf /etc/sanoid/
-cp sanoid /usr/local/bin/
-
-cronmarker="sanoid-auto-installed"
-cron="0 * * * * /usr/local/bin/sanoid # $cronmarker"
-(crontab -lu root 2>/dev/null | grep -v $cronmarker; echo "$cron") | crontab -u root -
 
 echo "***** Installing syncoid *****"
-
 cp syncoid /usr/local/bin/
 
