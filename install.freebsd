@@ -8,6 +8,9 @@ for pkg in $packages; do
   test -f /usr/bin/$pkg || ln -s /usr/local/bin/$pkg /usr/bin
 done
 
+pkg install perl5 p5-Config-IniFiles
+test -f /usr/bin/perl || ln -s /usr/local/bin/perl /usr/bin
+
 echo "***** Installing sanoid *****"
 
 mkdir -p /etc/sanoid
